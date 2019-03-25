@@ -2,6 +2,8 @@
 
 a very, very, very versatile event manager for C# (for a fonctional programing inspired by (best?) javascript practices).
 
+[the file](./Kit.Event/Kit/Event.cs)
+
 ```csharp
 
 // let's declare a brand new event
