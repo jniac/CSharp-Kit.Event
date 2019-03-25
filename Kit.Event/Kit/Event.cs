@@ -317,25 +317,31 @@ namespace Kit
         }
 
         private static Regex reToLongString = new Regex(@"^type|propagation$");
-        public string ToLongString()
+        public string ToLongString(string regexFilter = null)
         {
-            string[] fields = GetType()
+            string[] basic = {
+                "type: \"" + type + "\"",
+                "Locked: " + Locked,
+                "Target: " + Target,
+                "OriginTarget: " + OriginTarget,
+                "AlsoGlobal: " + AlsoGlobal,
+                "Cancelable: " + Cancelable,
+                "Canceled: " + Canceled,
+                "propagation: " + (propagation == null ? "no" : "yes"),
+            };
+
+            Type eventType = GetType();
+
+            IEnumerable<string> fields = eventType
                 .GetFields()
                 .Where(fi => reToLongString.Match(fi.Name).Success == false)
-                .Select(fi => fi.Name + ":" + fi.GetValue(this))
-                .ToArray();
+                .Select(fi => fi.Name + ":" + fi.GetValue(this));
 
-            return GetType().Name + ":" +
-                "\n\t" + "type: \"" + type + "\"" +
-                "\n\t" + "Locked: " + Locked +
-                "\n\t" + "Target: " + Target +
-                "\n\t" + "OriginTarget: " + OriginTarget +
-                "\n\t" + "AlsoGlobal: " + AlsoGlobal +
-                "\n\t" + "Cancelable: " + Cancelable +
-                "\n\t" + "Canceled: " + Canceled +
-                "\n\t" + "propagation: " + (propagation == null ? "no" : "yes") +
-                "\n\t" + string.Join("\n\t", fields) +
-                "";
+            IEnumerable<string> info = string.IsNullOrEmpty(regexFilter)
+                ? basic.Concat(fields)
+                : basic.Concat(fields).Where(s => new Regex(regexFilter).Match(s).Success);
+
+            return eventType.Name + ":" + string.Join("", info.Select(s => "\n\t" + s).ToArray());
         }
 
         public override string ToString()
