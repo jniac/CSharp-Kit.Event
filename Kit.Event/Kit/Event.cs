@@ -237,23 +237,6 @@ namespace Kit
             e.DoPropagation();
         }
 
-        //public static void Dispatch(object target, string type, bool cancelable = true, PropagationCallback propagation = null)
-        //{
-        //    Dispatch(new Event { 
-        //        target = target,
-        //        originTarget = target,
-        //        type = type,
-        //        cancelable = cancelable,
-        //        propagation = propagation,
-        //    });
-        //}
-
-        //// global shorthands
-        //public static void Dispatch(string type, bool cancelable = true, PropagationCallback propagation = null)
-        //{ Dispatch(Event.global, type, cancelable, propagation); }
-
-        //public static void Dispatch(bool cancelable = true, PropagationCallback propagation = null)
-        //{ Dispatch(Event.global, "*", cancelable, propagation); }
 
 
 
