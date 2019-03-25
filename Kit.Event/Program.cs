@@ -157,15 +157,29 @@ namespace MySuperProgram
             ConsoleTitle("AlsoGlobal test");
 
             Kit.Event.On<MySpecialEvent>(e => {
-                Console.WriteLine($"also global listener {e.ToLongString()}");
+                Console.WriteLine($"also global listener {e.ToLongString("type|Target|OriginTarget|number")}");
                 e.number++;
             }, key: "yolo");
+
             Kit.Event.Dispatch(new MySpecialEvent
             {
+                type = "Ascending",
                 Target = fooChild,
                 AlsoGlobal = true,
-                number = 12,
+                number = 0,
                 propagation = obj => (obj as Foo).parent,
+                Cancelable = false,
+            });
+
+            Console.WriteLine();
+
+            Kit.Event.Dispatch(new MySpecialEvent
+            {
+                type = "Descending",
+                Target = foo,
+                AlsoGlobal = true,
+                number = 0,
+                propagation = obj => (obj as Foo).children,
                 Cancelable = false,
             });
         }
