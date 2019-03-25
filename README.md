@@ -18,6 +18,7 @@ class MySpecialEvent : Kit.Event
 Kit.Event.On<MySpecialEvent>(e => {
 
     e.count++;
+    
     Console.WriteLine(
         "MySpecialEvent has been dispatched:" +
         $"\n  current target is {e.Target}" +
@@ -29,9 +30,9 @@ Kit.Event.On<MySpecialEvent>(e => {
 
 Kit.Event.Dispatch(new MySpecialEvent {
 
-    target = node,
-    propagation = obj => (obj as Node).children,
+    Target = node,
     AlsoGlobal = true,
+    propagation = obj => (obj as Node).children,
   
 });
 
