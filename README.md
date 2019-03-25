@@ -15,7 +15,7 @@ class MySpecialEvent : Kit.Event
 
 
 
-// elsewhere, in the program, about a certain "node"...
+// elsewhere, in the program, a global listener about a certain "node"...
 
 Kit.Event.On<MySpecialEvent>(e => {
 
