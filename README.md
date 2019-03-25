@@ -8,7 +8,7 @@ a very, very, very versatile event manager for C# (for a fonctional programing i
 
 class MySpecialEvent : Kit.Event
 {
-    public float count = 0;
+    public int count = 0;
 }
 
 
