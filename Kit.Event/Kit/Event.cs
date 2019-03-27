@@ -147,7 +147,7 @@ namespace Kit
         public static Listener On(string type, Action<Event> callback, object key = null)
         { return On(Event.global, type, callback, key); }
 
-        public static Listener On<T>(string type, Action<T> callback, object key = null) where T : Event 
+        public static Listener On<T>(string type, Action<T> callback, object key = null) where T : Event
         { return On<T>(Event.global, type, callback, key); }
 
         public static Listener On<T>(Action<T> callback, object key = null) where T : Event
@@ -243,7 +243,7 @@ namespace Kit
 
 
         // instance:
-        public bool Locked { get; private set; } = false;
+        public bool Locked { get; private set; }
 
         public string type = "*";
 
@@ -257,14 +257,14 @@ namespace Kit
         protected object originTarget;
         public object OriginTarget { get { return originTarget ?? target; } }
 
-        public bool AlsoGlobal { get; set; } = false;
+        public bool AlsoGlobal { get; set; }
 
         public PropagationCallback propagation;
 
         protected bool cancelable = true;
-        public bool Cancelable 
+        public bool Cancelable
         {
-            get { return cancelable; } 
+            get { return cancelable; }
             set { if (Locked == false) cancelable = value; }
         }
         public bool Canceled { get; private set; }
@@ -286,9 +286,9 @@ namespace Kit
             foreach (FieldInfo field in eventType.GetFields())
                 field.SetValue(clone, field.GetValue(this));
 
-            foreach(PropertyInfo property in eventType.GetProperties())
+            foreach (PropertyInfo property in eventType.GetProperties())
                 if (property.CanWrite)
-                    property.SetValue(clone, property.GetValue(this));
+                    property.SetValue(clone, property.GetValue(this, null), null);
 
             clone.target = newTarget;
             clone.originTarget = OriginTarget;
