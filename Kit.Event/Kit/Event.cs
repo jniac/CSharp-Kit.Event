@@ -145,13 +145,19 @@ namespace Kit
 
         // short for a global Listener
         public static Listener On(string type, Action<Event> callback, object key = null)
-        { return On(Event.global, type, callback, key); }
+        {
+            return On(Event.global, type, callback, key);
+        }
 
         public static Listener On<T>(string type, Action<T> callback, object key = null) where T : Event
-        { return On<T>(Event.global, type, callback, key); }
+        {
+            return On<T>(Event.global, type, callback, key);
+        }
 
         public static Listener On<T>(Action<T> callback, object key = null) where T : Event
-        { return On<T>(Event.global, "*", callback, key); }
+        {
+            return On<T>(Event.global, "*", callback, key);
+        }
 
 
 
@@ -346,7 +352,7 @@ namespace Kit
 
         public override string ToString()
         {
-            return "Event type:" + type + " target: " + target + "";
+            return "Event type:\"" + type + "\" target: " + target + "";
         }
     }
 }
