@@ -143,7 +143,14 @@ namespace Kit
 
         // generic
         public static Listener On<T>(object target, string type, Action<T> callback, object key = null) where T : Event
-        { return On(target, type, e => callback(e as T), key); }
+        {
+            return On(target, type, e => {
+
+                if (e is T)
+                    callback(e as T);
+
+            }, key);
+        }
 
         // short for a global Listener
         public static Listener On(string type, Action<Event> callback, object key = null)

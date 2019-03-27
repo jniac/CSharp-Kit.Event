@@ -182,6 +182,20 @@ namespace MySuperProgram
                 propagation = obj => (obj as Foo).children,
                 Cancelable = false,
             });
+
+            Kit.Event.Off(key: "yolo");
+
+
+
+
+
+            ConsoleTitle("cast test");
+
+            Kit.Event.On("*", e => Console.WriteLine($"e: {e}"));
+            Kit.Event.On<MySpecialEvent>("*", e => Console.WriteLine($"(MySpecialEvent)e: {e}"));
+            Kit.Event.Dispatch(new Kit.Event { type = "basic event" });
+            Kit.Event.Dispatch(new MySpecialEvent { type = "basic event" });
+
         }
     }
 }
