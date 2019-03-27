@@ -96,6 +96,8 @@ namespace Kit
             {
                 foreach (Listener child in children)
                     Listener.Remove(child.target, child);
+
+                children.Clear();
             }
 
             Listener.Remove(target, this);
